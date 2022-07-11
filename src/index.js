@@ -1,3 +1,5 @@
+import "./styles/index.css"
+
 const fruits = {
     apple: 2,
     kiwi: 5,

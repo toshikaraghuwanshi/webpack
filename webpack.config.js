@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin =require("mini-css-extract-plugin");
 let mode ="development";
 
 if(process.env.NODE_ENV === "production"){
@@ -8,7 +9,10 @@ module.exports ={
     mode: mode,
 
     module:{
-        rules:[
+        rules:[{
+            test:/\.css$/i,
+            use:[MiniCssExtractPlugin.loader, "css-loader"],
+        },
             {
                 test: /\.js$/,
                 exclude:/node_modules/,
@@ -18,8 +22,11 @@ module.exports ={
             }
         ]
     },
+    plugins:[new MiniCssExtractPlugin()],
+
     devtool:"source-map",
     devServer:{
+        hot:true,
         static:"./dist",
     },
 };
