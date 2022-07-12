@@ -1,5 +1,7 @@
 import "../styles/index.scss";
 import Recipes from "./Recipes";
+import images from "../images/img3.jpeg";
+
 
 
 const App = () => {
@@ -12,8 +14,9 @@ const App = () => {
                         Hi Toshika
                     </h1>
                 </section>
+                <img src={images} alt="img" width="250" />
+                <Recipes />
             </main>
-            <Recipes />
         </>
     )
 }

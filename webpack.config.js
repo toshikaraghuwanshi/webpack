@@ -1,37 +1,57 @@
-const MiniCssExtractPlugin =require("mini-css-extract-plugin");
-let mode ="development";
-let target ="web";
-if(process.env.NODE_ENV === "production"){
-    mode ="production";
-    target ="browserslist";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let mode = "development";
+let target = "web";
+if (process.env.NODE_ENV === "production") {
+    mode = "production";
+    target = "browserslist";
 }
 
-module.exports ={
+module.exports = {
     mode: mode,
+    output:{
+        assetModuleFilename: "./images/[hash]][ext][query]"
+    },
 
-    module:{
-        rules:[{
-            test:/\.s?css$/i,
-            use:[MiniCssExtractPlugin.loader, "css-loader", "postcss-loader" ,"sass-loader"],
-        },
+    module: {
+        rules: [
+            {
+                test:/\.jpeg$/i,
+                type: "asset",
+                parser: {
+                    dataUrlCondition:{
+                        maxSize: 30 * 1024,
+                    }
+                }
+            },
+            {
+                test: /\.s?css$/i,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: { publicPath: "" },
+                    },
+                    "css-loader",
+                    "postcss-loader",
+                    "sass-loader"],
+            },
             {
                 test: /\.jsx?$/,
-                exclude:/node_modules/,
-                use:{
-                    loader:"babel-loader",
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
                 }
             }
         ]
     },
-    plugins:[new MiniCssExtractPlugin()],
+    plugins: [new MiniCssExtractPlugin()],
 
     resolve: {
-        extension: [".js",".jsx"],
+        extensions: [".js", ".jsx"],
     },
 
-    devtool:"source-map",
-    devServer:{
-        hot:true,
-        static:"./dist",
+    devtool: "source-map",
+    devServer: {
+        hot: true,
+        static: "./dist",
     },
 };
