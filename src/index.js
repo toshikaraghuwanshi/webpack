@@ -1,17 +1,5 @@
-import "./styles/index.scss"
+import { render } from "react-dom";
+import App from "./components/App";
 
-const fruits = {
-    apple: 2,
-    kiwi: 5,
-    pawPaw: 3,
-    orange: 9,
-    mango: 5
+render(<App />, document.getElementById("root"));
 
-}
-
-const winterFruits ={
-    ...fruits,
-    custardApple: 5,
-}
-console.log(fruits)
-console.log(winterFruits)
